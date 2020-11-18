@@ -1,7 +1,7 @@
 {
   "name": "sudoku-type-solver",
   "version": "1.0.0",
-  "description": "Solves Sudokus using TypeScript's types and compiler",
+  "description": "Solves Sudoku using TypeScript's types and compiler",
   "dependencies": {},
   "devDependencies": {
     "typescript": "^4.1.1-rc"
@@ -9,6 +9,6 @@
   "scripts": {
     "build": "tsc"
   },
-  "author": "",
+  "author": "Eamonn Boyle",
   "license": "ISC"
 }

@@ -75,7 +75,6 @@ type SampleGame1 = [
   ]
 ];
 
-
 type Result1 = SolveGame<SampleGame1>
 
 const sampleGame1Solution: Result1 = [
