@@ -32,16 +32,16 @@ type IsSingleNumber<V extends Numbers> =
   >
 
 type Head<T extends SudokuBox> = T extends [infer U, ...infer T] ? U : never;
-type Tail<T extends SudokuBox> = T extends [infer U, ...infer T] 
-  ? T extends SudokuBox 
-    ? T 
-    : never 
+type Tail<T extends SudokuBox> = T extends [infer U, ...infer T]
+  ? T extends SudokuBox
+    ? T
+    : never
   : never;
 
-type TailN<T extends SudokuGame> = T extends [infer U, ...infer T] 
-  ? T extends SudokuGame 
-    ? T 
-    : never 
+type TailN<T extends SudokuGame> = T extends [infer U, ...infer T]
+  ? T extends SudokuGame
+    ? T
+    : never
   : never;
 
 type IsBoxComplete<G extends SudokuBox> =
@@ -67,14 +67,14 @@ type FilterBox<G extends SudokuBox, V extends Numbers> =
   : G;
 
 type FilterGridStep<G extends SudokuBox, Values extends SudokuBox> =
-  Values["length"] extends 0 
+  Values["length"] extends 0
     ? G
     : FilterBox<FilterGridStep<G, Tail<Values>>, Values[0]>
 
 type FilterGrid<G extends SudokuBox> =
   FilterGridStep<G, G>
 
-  
+
 export type SolveBox<G extends SudokuBox> =
   IsBoxComplete<G> extends "true" ? G : SolveBox<FilterGrid<G>>
 
@@ -93,17 +93,17 @@ type FilterGameGrid<G extends SudokuGame> =
 
 // Could not get the recursive form of FilterGameGrid to produce the correct result
 // type FilterGameGrid<G extends SudokuGame> =
-//   G["length"] extends 0 
+//   G["length"] extends 0
 //   ? G
 //   : [FilterGrid<G[0]>, ...FilterGameGrid<Tail<G>>];
 
 type ExcludeNumbersFromUnion<Union extends Numbers, ToRemove extends SudokuBox> =
-  IsSingleNumber<Union> extends "true" 
+  IsSingleNumber<Union> extends "true"
   ? Union
-  : ToRemove["length"] extends 0 
+  : ToRemove["length"] extends 0
     ? Union
-    : IsSingleNumber<ToRemove[0]> extends "true" 
-      ? ExcludeNumbersFromUnion<Exclude<Union, ToRemove[0]>, Tail<ToRemove>> 
+    : IsSingleNumber<ToRemove[0]> extends "true"
+      ? ExcludeNumbersFromUnion<Exclude<Union, ToRemove[0]>, Tail<ToRemove>>
       : ExcludeNumbersFromUnion<Union, Tail<ToRemove>>;
 
 type FilterBoxRow<C extends SudokuBox, R1 extends SudokuBox, R2 extends SudokuBox> =
@@ -171,7 +171,10 @@ type IsGameComplete<G extends SudokuGame> =
   ? "true"
   : IsBoxComplete<G[0]> | IsGameComplete<TailN<G>>
 
+export type SolverIteration<G extends SudokuGame> =
+  FilterGameGrid<FilterGameRows<FilterGameColumns<G>>>
+
 export type SolveGame<G extends SudokuGame> =
-  IsGameComplete<G> extends "true" ? G : SolveGame<
-    FilterGameGrid<FilterGameRows<FilterGameColumns<G>>>
-  >;
+  IsGameComplete<G> extends "true"
+    ? G
+    : SolveGame< SolverIteration<G> >;
