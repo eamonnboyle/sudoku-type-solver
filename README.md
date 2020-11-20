@@ -4,6 +4,9 @@ This repository is just a bit of fun that explores
 pushing the advanced features of TypeScript's type system
 to the limits by using it to solve Sudoku puzzles.
 
+There is an associated [TypeScript 4.1 blog post](https://instil.co/blog/crazy-powerful-typescript-41/)
+that covers some of the features that are used. 
+
 Note that we are not executing code or using data, we're only
 defining types, but the types are compiled so that only
 the solution to the Sudoku is a valid value.
