@@ -4,7 +4,7 @@
   "description": "Solves Sudoku using TypeScript's types and compiler",
   "dependencies": {},
   "devDependencies": {
-    "typescript": "^4.1.1-rc"
+    "typescript": "^4.1.2"
   },
   "scripts": {
     "build": "tsc"

@@ -21,7 +21,7 @@ types in TypeScript 4.1.
 
 ## Setup
 
-You will need to ensure you are using TypeScript 4.1 (currently RC)
+You will need to ensure you are using TypeScript 4.1 
 so perform an `npm install` and set your IDE to use the workspace
 version of TypeScript.
 
